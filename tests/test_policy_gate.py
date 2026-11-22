@@ -184,6 +184,12 @@ class TestMonetizationLine(unittest.TestCase):
     def test_ok(self):
         self.assertEqual(ve.monetization_line(edited(), []), "Monetization: OK")
 
+    def test_legacy_published_is_not_checked(self):
+        ep = {k: v for k, v in edited().items() if k != "policy_check"}
+        ep["status"] = "published"
+        self.assertEqual(ve.monetization_line(ep, ["x (YT-AUTH-1)"]),
+                         "Monetization: not checked (made before the policy gate)")
+
     def test_pending_before_package(self):
         self.assertIn("pending", ve.monetization_line(make_valid(), []))
 

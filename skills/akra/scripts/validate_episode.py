@@ -221,6 +221,8 @@ def monetization_line(ep, problems) -> str:
     """One-line summary for the package step: `Monetization: OK`, `... pending` (policy_check not filled
     yet, before status edited), `... OK so far (pending: <ids> at <step>)` (only items of steps the status has not
     reached are open) or `... at risk: <ids> [impact]` (items of reached steps fail)."""
+    if isinstance(ep, dict) and is_legacy(ep) and "policy_check" not in ep:
+        return "Monetization: not checked (made before the policy gate)"
     ids = set()
     for p in problems:
         ids.update(_POLICY_ID.findall(p))
