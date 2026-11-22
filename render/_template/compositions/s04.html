@@ -1,0 +1,17 @@
+<template>
+<style>
+#root { position:absolute; inset:0; }
+#root svg { position:absolute; inset:0; }
+</style>
+<div id="root" data-composition-id="s04" data-width="1080" data-height="1920">
+<svg id="s04-svg" width="1080" height="1920" viewBox="0 0 1080 1920" data-layout-allow-overlap>
+<g id="s04-box"><rect x="90" y="420" width="900" height="700" rx="28" fill="#2C3843" stroke="#52606D" stroke-width="4" stroke-dasharray="18 12"/><text x="540" y="540" fill="#E9C9A3" font-size="44" font-weight="800" text-anchor="middle" letter-spacing="0" font-family="Montserrat">SHOT 04 · DIAGRAM</text><text x="540" y="640" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">Lattice compresses from both sides</text><text x="540" y="692" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">with white pressure arrows and an</text><text x="540" y="744" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">amber heat glow; cyan droplets</text><text x="540" y="796" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">stay locked inside; label</text><text x="540" y="848" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">&quot;trapped, not liquid&quot;</text></g>
+</svg>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#s04-box",{opacity:0},{opacity:1,duration:0.3},0);
+tl.set({}, {}, 7.60);
+window.__timelines["s04"] = tl;
+</script>
+</template>

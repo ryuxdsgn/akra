@@ -1,0 +1,17 @@
+<template>
+<style>
+#root { position:absolute; inset:0; }
+#root svg { position:absolute; inset:0; }
+</style>
+<div id="root" data-composition-id="s08" data-width="1080" data-height="1920">
+<svg id="s08-svg" width="1080" height="1920" viewBox="0 0 1080 1920" data-layout-allow-overlap>
+<g id="s08-box"><rect x="90" y="420" width="900" height="700" rx="28" fill="#2C3843" stroke="#52606D" stroke-width="4" stroke-dasharray="18 12"/><text x="540" y="540" fill="#E9C9A3" font-size="44" font-weight="800" text-anchor="middle" letter-spacing="0" font-family="Montserrat">SHOT 08 · DIAGRAM</text><text x="540" y="640" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">Timeline arrow from early Earth to</text><text x="540" y="692" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">today; cyan water moves slowly</text><text x="540" y="744" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">between the mantle band and the</text><text x="540" y="796" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">surface ocean; label &quot;stored for</text><text x="540" y="848" fill="#B5BEC6" font-size="36" font-weight="600" text-anchor="middle" letter-spacing="0" font-family="Montserrat">ages&quot;</text></g>
+</svg>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#s08-box",{opacity:0},{opacity:1,duration:0.3},0);
+tl.set({}, {}, 6.00);
+window.__timelines["s08"] = tl;
+</script>
+</template>

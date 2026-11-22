@@ -1,0 +1,47 @@
+dist/
+__pycache__/
+.superpowers/
+.DS_Store
+
+# Video build output (regenerate with `npm run render` / snapshot)
+node_modules/
+.hyperframes/
+render/*/renders/
+render/*/assets/*_norm.wav
+*.mp4
+*.mov
+
+# Production data stays local (not in the akra skill repo); back it up outside git
+channels/
+render/ep-*/
+render/*/ep-*/
+render/*/
+!render/_template/
+!render/_template-*/
+_archive/
+
+# Secrets (ElevenLabs API key etc.)
+.env
+
+# Local TTS environment (Kokoro)
+.venv-kokoro/
+
+# Local TTS environment (dots.tts, MLX) + downloaded model weights
+.venv-dots/
+.models/
+
+# YouTube API (OAuth client + token)
+client_secret*.json
+.youtube-token.json
+.youtube-*token.json
+.meta-*token.json
+.venv-youtube/
+
+# Local user notes for the agent (channels, schedule); not committed
+AGENTS.local.md
+
+# Private export deny list (local only)
+.public-deny.txt
+
+# Private export exclusions (local only)
+.public-export-exclude.txt

@@ -1,0 +1,118 @@
+{
+  "id": "ep-001",
+  "channel": "deep-earth",
+  "niche": "science & space facts",
+  "topic": "Water stored in ringwoodite deep in Earth's mantle",
+  "status": "scripted",
+  "hook": "This ocean hides a second ocean.",
+  "script": "This ocean hides a second ocean. Hundreds of miles under your feet, scientists found water locked inside a blue mineral called ringwoodite. You can't swim in it. The water is trapped inside the crystal itself, squeezed by heat and crushing pressure. In 2014, a tiny diamond from Brazil carried a piece of this mineral to the surface, and it held water. If the whole layer is like that, it could hold as much water as our oceans, or even more. Scientists are still debating the exact amount. But it hints that some of Earth's water has been stored deep inside the planet for a very long time. So the next time you look at the waves, remember... there may be another ocean you will never see.",
+  "sources": [
+    {
+      "claim": "A diamond from Brazil held ringwoodite with water inside (2014)",
+      "url": "https://www.nature.com/articles/nature13080"
+    },
+    {
+      "claim": "The 410-660 km transition zone may hold large amounts of water",
+      "url": "https://www.science.org/doi/10.1126/science.1253358"
+    }
+  ],
+  "variation": {
+    "story": "a tiny diamond carries proof of a hidden ocean to the surface",
+    "setting": "cutaway of Earth's mantle under an ocean",
+    "props": "ringwoodite lattice, diamond, water droplets"
+  },
+  "shots": [
+    {
+      "t_start": 0,
+      "t_end": 2.4,
+      "narration": "This ocean hides a second ocean.",
+      "type": "diagram",
+      "prompt": "Calm dark-blue ocean surface at dusk drawn as layered vector waves; camera tilts down through the surface into darkness; a faint cyan glow appears far below; no text"
+    },
+    {
+      "t_start": 2.4,
+      "t_end": 4.8,
+      "narration": "Hundreds of miles under your feet,",
+      "type": "diagram",
+      "prompt": "Cutaway of Earth: crust, upper mantle and a cyan band at 410-660 km depth draw in layer by layer; label \"410 km\" appears; slow zoom into the cyan band"
+    },
+    {
+      "t_start": 4.8,
+      "t_end": 8.8,
+      "narration": "scientists found water locked inside a blue mineral called ringwoodite.",
+      "type": "diagram",
+      "prompt": "Brass ringwoodite crystal lattice rotates slowly; tiny cyan droplets light up inside the lattice; label \"ringwoodite\" fades in"
+    },
+    {
+      "t_start": 8.8,
+      "t_end": 16.4,
+      "narration": "You can't swim in it. The water is trapped inside the crystal itself, squeezed by heat and crushing pressure.",
+      "type": "diagram",
+      "prompt": "Lattice compresses from both sides with white pressure arrows and an amber heat glow; cyan droplets stay locked inside; label \"trapped, not liquid\""
+    },
+    {
+      "t_start": 16.4,
+      "t_end": 24.4,
+      "narration": "In 2014, a tiny diamond from Brazil carried a piece of this mineral to the surface, and it held water.",
+      "type": "diagram",
+      "prompt": "Small brass diamond rises from the mantle band to the surface along a dotted path; zoom into the diamond to reveal the blue inclusion with a cyan droplet icon; label \"Brazil, 2014\""
+    },
+    {
+      "t_start": 24.4,
+      "t_end": 32.0,
+      "narration": "If the whole layer is like that, it could hold as much water as our oceans, or even more.",
+      "type": "diagram",
+      "prompt": "Two spheres side by side: surface oceans (left) and the deep water estimate (right) grows to equal size, then a dashed outline shows it could be larger; labels \"oceans\" and \"deep layer?\""
+    },
+    {
+      "t_start": 32.0,
+      "t_end": 36.8,
+      "narration": "Scientists are still debating the exact amount.",
+      "type": "diagram",
+      "prompt": "Question-mark range bar under the deep sphere widens and narrows to show the debated estimate; label \"still debated\""
+    },
+    {
+      "t_start": 36.8,
+      "t_end": 42.8,
+      "narration": "But it hints that some of Earth's water has been stored deep inside the planet for a very long time.",
+      "type": "diagram",
+      "prompt": "Timeline arrow from early Earth to today; cyan water moves slowly between the mantle band and the surface ocean; label \"stored for ages\""
+    },
+    {
+      "t_start": 42.8,
+      "t_end": 50.4,
+      "narration": "So the next time you look at the waves, remember... there may be another ocean you will never see.",
+      "type": "diagram",
+      "prompt": "Vector waves roll onto a dark beach at night; camera sinks below the sand layers to reveal the cyan mantle band glowing deep beneath; loops back to the opening ocean frame"
+    }
+  ],
+  "title": "There May Be a Hidden Ocean Under Our Feet",
+  "description": "Water locked inside a deep-mantle mineral called ringwoodite may rival the oceans on the surface. Scientists still debate how much. Sources: Pearson et al., Nature (2014); Schmandt et al., Science (2014).\nMusic: \"Pulsar\" by The Grey Room / Density & Time (YouTube Audio Library). Voice: Kokoro-82M (hexgrad, Apache-2.0).\n#shorts #science #earth #ocean",
+  "hashtags": [
+    "#shorts",
+    "#science",
+    "#earth",
+    "#ocean"
+  ],
+  "ai_disclosure": false,
+  "synthetic_content": false,
+  "made_for_kids": false,
+  "music_source": "youtube_audio_library",
+  "originality_checklist": {
+    "original_script": true,
+    "custom_voice_direction": true,
+    "manual_edit": true,
+    "added_value": true
+  },
+  "policy_check": {
+    "checked_on": "2026-11-22",
+    "items": {
+      "YT-AUTH-1": "pass",
+      "YT-AUTH-2": "pass",
+      "YT-FACT-1": "pass",
+      "YT-MED-1": "pass",
+      "YT-REUSE-1": "pass",
+      "YT-AD-2": "pass"
+    }
+  }
+}
