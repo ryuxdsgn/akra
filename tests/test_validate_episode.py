@@ -3,6 +3,7 @@ import unittest
 from helpers import make_script, make_shots, make_valid
 
 from validate_episode import count_words, est_seconds, validate, warnings
+import validate_episode as ve
 
 
 def has_error(errors, field):
@@ -193,3 +194,32 @@ class TestNonFiniteTimes(unittest.TestCase):
             ep = make_valid()
             ep["shots"][-1]["t_end"] = bad
             self.assertTrue(has_error(validate(ep), "shots[4]"), bad)
+
+
+class TestTopicRepeat(unittest.TestCase):
+    """A channel must not repeat a subject (the duplicate pressure-cooker episodes, 2026-11-23)."""
+
+    def ep(self, eid, topic, idea=None, channel="c1"):
+        e = {"id": eid, "channel": channel, "topic": topic}
+        if idea:
+            e["idea"] = idea
+        return e
+
+    def test_same_subject_other_wording_is_caught(self):
+        a = self.ep("ep-018", "How a pressure cooker cooks faster: Papin's steam digester")
+        b = self.ep("ep-022", "Why a pressure cooker cooks faster: trapped steam raises pressure")
+        errs = ve.check_topic_repeat(b, [a])
+        self.assertEqual(len(errs), 1)
+        self.assertIn("ep-018", errs[0])
+        self.assertIn("YT-REUSE-1", errs[0])
+
+    def test_same_idea_id_is_caught(self):
+        a = self.ep("ep-001", "How a dam makes electricity", idea="029")
+        b = self.ep("ep-009", "Turbines behind concrete walls", idea="029")
+        self.assertIn("same idea 029", ve.check_topic_repeat(b, [a])[0])
+
+    def test_different_subjects_and_other_channels_pass(self):
+        a = self.ep("ep-001", "How a touchscreen feels your finger")
+        b = self.ep("ep-002", "How a pressure cooker cooks faster")
+        c = self.ep("ep-003", "How a pressure cooker cooks faster", channel="c2")
+        self.assertEqual(ve.check_topic_repeat(b, [a, c]), [])

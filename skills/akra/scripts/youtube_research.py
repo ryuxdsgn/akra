@@ -126,7 +126,12 @@ def fetch(yt, cfg, now):
             uploads[it["id"]] = it["contentDetails"]["relatedPlaylists"]["uploads"]
     baselines = {}
     for cid, pl in uploads.items():
-        items = yt.playlistItems().list(part="contentDetails", playlistId=pl, maxResults=RECENT_UPLOADS).execute().get("items", [])
+        try:
+            items = yt.playlistItems().list(part="contentDetails", playlistId=pl, maxResults=RECENT_UPLOADS).execute().get("items", [])
+        except Exception as ex:  # a channel whose uploads playlist is gone (404): skip it, no baseline
+            if getattr(getattr(ex, "resp", None), "status", None) != 404:
+                raise
+            continue
         vids = [i["contentDetails"]["videoId"] for i in items]
         if vids:
             stats = yt.videos().list(part="statistics", id=",".join(vids)).execute().get("items", [])

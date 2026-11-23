@@ -451,13 +451,13 @@ def upload(a):
             print(f"{name}: skipped (not in channel meta.platforms)")
     if "facebook" in plats:
         if ep.get("facebook_video_id") and not a.force:
-            print(f"facebook: already posted ({ep['facebook_url']}), use --force to post again")
+            print(f"facebook: already posted ({ep.get('facebook_url') or ep['facebook_video_id']}), use --force to post again")
         else:
             post_facebook(ep, f, tok, a.schedule)
             save(ep, a.episode)
     if "instagram" in plats:
         if ep.get("instagram_media_id") and not a.force:
-            print(f"instagram: already posted ({ep['instagram_url']})")
+            print(f"instagram: already posted ({ep.get('instagram_url') or ep['instagram_media_id']})")
         elif a.schedule:
             ep["instagram_pending"] = True
             print(f"instagram: queued, `due` publishes it after {when_utc(ep).isoformat()}")

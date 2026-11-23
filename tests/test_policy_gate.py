@@ -291,6 +291,7 @@ class TestVariation(unittest.TestCase):
             (eps.parent / "channel.json").write_text(json.dumps(approved_channel()))
             a, b = make_valid(), make_valid()
             a["id"], b["id"] = "ep-001", "ep-002"
+            a["topic"] = "How a pin-tumbler door lock opens"  # a different subject; only the variation repeats
             (eps / "ep-001.json").write_text(json.dumps(a))
             (eps / "ep-002.json").write_text(json.dumps(b))
             errors, _, _ = ve.validate_file(eps / "ep-002.json")

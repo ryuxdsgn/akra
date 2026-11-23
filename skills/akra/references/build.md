@@ -63,6 +63,7 @@ Before starting, **load the `hyperframes` skill** (and `hyperframes-cli`, `media
 - `build.py` reads the Episode Package (`shots[]`) and `assets/transcript.json`, then produces `index.html`.
 - **Reusable items (optional):** environments and other items you registered with the library engine come from `Library` (`L = Library(HERE, channelcfg.locate(HERE)[1])`; see `references/library.md`). Everything else is drawn in the episode's scene functions.
 - Each `diagram` scene = one animation block (HTML/SVG + GSAP) following the shot description and the style bible.
+- **Lighting for cartoon channels** (optional; only if `channel.json` has `"lighting"` and this installation has `references/lighting.md`): soft room + light on the characters, see that file.
 - **Cinematic depth** (if the style bible asks for it): use `depth.py` from the template.
   - `depth.layers()` builds far/mid/near layers with blur, bloom and light spots.
   - `depth.hero_light()` + `depth.cast_shadow()` give a warm key light, cyan rim light, bottom shadow and a cast shadow on the main object.

@@ -172,6 +172,49 @@ def _fold(text: str) -> str:
     return " ".join(str(text).casefold().split())
 
 
+# Words that do not tell two topics apart ("How a fridge works" vs "Why your fridge ...").
+_TOPIC_STOP = set("""a an the how why what when where who which does do did is are was were it its your you
+your's our my of in on at to for from by with and or but so as that this these those be been being can
+works work working really actually secret secretly inside behind keeps keep makes make made gets get
+there here into out up down over under about after before just much more most very still even than
+explained explain hidden""".split())
+TOPIC_REPEAT_MIN = 0.6
+
+
+def topic_words(ep: dict) -> set:
+    """Key words of an episode's subject: the part of `topic` before ':' (else the title), lower case,
+    without filler words, with a plain plural 's' removed."""
+    text = ep.get("topic") or ep.get("title") or ""
+    text = str(text).split(":")[0]
+    words = set()
+    for w in re.findall(r"[a-z0-9]+", text.casefold()):
+        if w in _TOPIC_STOP or len(w) < 3:
+            continue
+        words.add(w[:-1] if len(w) > 4 and w.endswith("s") and not w.endswith("ss") else w)
+    return words
+
+
+def check_topic_repeat(ep: dict, others) -> list:
+    """Errors when another episode of the same channel (any status, earlier or later) covers the same subject:
+    the same `idea` id, or topic key words that overlap by TOPIC_REPEAT_MIN or more (Jaccard). Repeating a
+    subject reads as repetitive content (YT-REUSE-1)."""
+    if not isinstance(ep, dict):
+        return []
+    mine, errors = topic_words(ep), []
+    for other in others or ():
+        if not isinstance(other, dict) or other.get("id") == ep.get("id") \
+                or other.get("channel") != ep.get("channel"):
+            continue
+        if ep.get("idea") and str(other.get("idea")) == str(ep.get("idea")):
+            errors.append(f"topic: same idea {ep['idea']} as {other.get('id')} (YT-REUSE-1)")
+            continue
+        theirs = topic_words(other)
+        if mine and theirs and len(mine & theirs) / len(mine | theirs) >= TOPIC_REPEAT_MIN:
+            errors.append(f"topic: same subject as {other.get('id')} "
+                          f"({', '.join(sorted(mine & theirs))}) (YT-REUSE-1)")
+    return errors
+
+
 def _has_phrase(text: str, phrase: str) -> bool:
     return re.search(r"(?<!\w)" + re.escape(_fold(phrase)) + r"(?!\w)", _fold(text)) is not None
 
@@ -809,8 +852,11 @@ def validate_file(path: Path, channel_path=None, previous_paths=None, for_upload
     language = profile.get("language") if profile and profile.get("language") in LANGUAGES else None
     if not isinstance(ep, dict):
         return validate(ep), [], list(PRE_UPLOAD_IDS)
-    previous = previous_episodes(ep, _sibling_episodes(path, previous_paths))
+    siblings = _sibling_episodes(path, previous_paths)
+    previous = previous_episodes(ep, siblings)
     errors = validate(ep, language, profile, previous, for_upload)
+    if not is_legacy(ep):
+        errors += check_topic_repeat(ep, siblings)
     errors += _channel_errors(ep, path, channel_path)
     return errors, warnings(ep, profile, previous, language), missing_policy_items(ep)
 

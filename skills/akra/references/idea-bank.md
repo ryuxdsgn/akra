@@ -41,4 +41,6 @@ Besides the channel's own data (`review-log.csv`), study other videos in the sam
 - sources: Pearson et al., Nature (2014); Schmandt et al., Science (2014)
 - visual: high
 ```
-Change `[ ]` to `[x]` once the idea is used, and write its episode id.
+Change `[ ]` to `[x]` **as soon as an episode is created from the idea** (the `script` step, not at upload), and write its episode id. An unchecked idea that was already made is how a channel repeats a subject.
+
+**Before picking ideas:** list the channel's episodes (`ls channels/<id>/episodes/*.json` and their `topic`/`title`) and skip any idea whose subject is already covered, even if its box is still empty. `validate_episode.py` also refuses a package whose `idea` id or topic key words repeat another episode of the channel (`topic: same subject as ep-xxx`, YT-REUSE-1).

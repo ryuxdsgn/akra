@@ -10,6 +10,8 @@
   - `diagram` (**default**): a HyperFrames scene. The `prompt` field holds the scene description: the object, what moves, which arrows/labels appear, and their order.
   - `stock`: licensed, credited footage (e.g. gameplay), only if the channel's style bible allows it. The source credit goes in the description.
 
+- **Continuity:** follow `story_logic` from the script. A prop or character state set in one scene (holding, sitting, put down) carries into the next scene unless the action that changes it is shown.
+
 ## Writing a `diagram` scene description
 Write in English (scene descriptions are internal; on-screen text still uses the channel language), one short paragraph:
 

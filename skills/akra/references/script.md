@@ -12,6 +12,9 @@
 - **Any language:** match pace and vocabulary to your audience.
 - Other languages: follow the same idea (short, spoken, everyday wording of that language); add a row for the language to the table if a channel needs it.
 
+## Before writing: is the subject new?
+Check the channel's existing episodes (topic and title), not only the idea bank boxes. Write the idea number into the Episode Package as `idea` and tick the idea in `ideas.md` with the episode id now. The validator fails a package that repeats another episode's subject (`topic: same subject as ep-xxx`).
+
 ## Story: one real moment (adapted from BEATS, social-media-skills `storytelling-and-narrative`, MIT)
 An explainer script easily becomes a list of mechanisms. Tie the mechanism to **one real moment the viewer knows**, then explain the mechanism **through** that moment.
 - **The moment:** a concrete everyday event (a phone dying at 20%, ice melting faster on a metal tray, a car that will not start on a cold morning). The viewer is the lead ("your kitchen", "your ceiling"); the channel is the guide.
@@ -19,6 +22,14 @@ An explainer script easily becomes a list of mechanisms. Tie the mechanism to **
 - **Concrete detail:** 1–3 specific sensory details (burnt smell, thin smoke, a loud "beep"), not generic words. These details also become scene material in the `shots` mode.
 - **One emotion:** pick one feeling to take home (relief, awe, "oh, that's why"). Close with one meaning that makes the viewer see themselves.
 - **If the topic has no moment** (e.g. an abstract concept), do not force it; use one concrete example worked through from start to end.
+
+## Story logic check (required before the voiceover)
+Read the script once as a viewer and ask "why?" at every line. Fix anything a viewer would question:
+1. **Place and time:** every line fits where the scene is and when it happens (nobody "wakes up in the morning" in a kitchen; a breakfast scene is in daylight).
+2. **Props:** every prop has a reason to be in that place, and recurring props stay continuous across cuts (put down, kept visible, picked up again; never pop in or out).
+3. **Motivation:** each character has a clear reason for what they do and say, and no line contradicts it (a tired character does not then do the hardest part without a reason).
+4. **Cause and effect:** each line follows from the one before; the ending pays off the opening.
+5. **Write the logic down** in one line per beat in the Episode Package (`story_logic`), so the build follows the same story.
 
 ## Hook: many candidates, choose by score (adapted from social-media-skills `hook-writer`, MIT)
 1. **Mine it from the content, do not stick it on.** Find the strongest material in the script: the most surprising fact, the biggest stakes, the most specific number, the sharpest point of view, or the most relatable moment.
