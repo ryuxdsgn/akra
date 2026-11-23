@@ -85,7 +85,8 @@ class TestSkillContent(unittest.TestCase):
 
     def test_no_google_flow_outside_legacy_rules(self):
         files = [SKILL_DIR / "SKILL.md"] + sorted((SKILL_DIR / "references").glob("*.md"))
-        files += sorted((SKILL_DIR / "templates").glob("*"))
+        files += sorted((SKILL_DIR / "templates").glob("*.*"))
+        files += sorted((SKILL_DIR / "templates" / "niches").rglob("*.*"))
         for path in files:
             if path.name == "rules.md":   # documents the legacy veo/flow_image handling
                 continue

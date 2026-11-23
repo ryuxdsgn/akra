@@ -1,0 +1,40 @@
+{
+  "id": "history-origins-example",
+  "name": "<Your Channel Name>",
+  "niche": "origins of everyday objects, customs and words",
+  "persona": "curious history buff who checks the museum records (not a historian)",
+  "sensitive_topic": null,
+  "made_for_kids": false,
+  "status": "testing",
+  "language": "en",
+  "platforms": [
+    "youtube"
+  ],
+  "voice": {
+    "provider": "kokoro (local)",
+    "voice_name": "am_fenrir",
+    "model_id": "hexgrad/Kokoro-82M v1.0",
+    "settings": "speed 0.95, lang a (American English)",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/hexgrad/Kokoro-82M",
+    "license_checked": "2026-01-01"
+  },
+  "style_bible": "Code-drawn everyday objects that morph back through their history on a warm paper background, a timeline ruler with a sliding year marker, paper maps with dashed travel routes, generic cartoon period characters in period costume (never likenesses of real people), red-ink highlights and short labels, vertical 9:16, no photos, no logos.",
+  "style_approved_on": "2026-01-01",
+  "posting_slots": [
+    "12:00",
+    "20:00"
+  ],
+  "timezone": "America/Chicago",
+  "videos_per_day": 1,
+  "research": {
+    "queries": [
+      "origin of everyday things",
+      "word origin explained",
+      "history of objects shorts"
+    ],
+    "days": 60,
+    "min_ratio": 3
+  },
+  "started_on": "2026-01-01"
+}

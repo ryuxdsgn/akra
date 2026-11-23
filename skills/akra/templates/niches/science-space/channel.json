@@ -1,0 +1,40 @@
+{
+  "id": "science-space-example",
+  "name": "<Your Channel Name>",
+  "niche": "science and space facts",
+  "persona": "curious science friend who reads the NASA pages for you (not a scientist)",
+  "sensitive_topic": null,
+  "made_for_kids": false,
+  "status": "testing",
+  "language": "en",
+  "platforms": [
+    "youtube"
+  ],
+  "voice": {
+    "provider": "kokoro (local)",
+    "voice_name": "am_fenrir",
+    "model_id": "hexgrad/Kokoro-82M v1.0",
+    "settings": "speed 0.95, lang a (American English)",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/hexgrad/Kokoro-82M",
+    "license_checked": "2026-01-01"
+  },
+  "style_bible": "Code-drawn planets, stars and weather as clean vector diagrams and Three.js spheres, scale comparisons on one shared ruler, cutaways show the layers inside, amber highlights and short labels, deep navy star-field background, slow zooms, vertical 9:16, no photos, no agency logos, no real people.",
+  "style_approved_on": "2026-01-01",
+  "posting_slots": [
+    "08:00",
+    "19:00"
+  ],
+  "timezone": "Europe/London",
+  "videos_per_day": 1,
+  "research": {
+    "queries": [
+      "space facts explained",
+      "planet size comparison",
+      "why is the sky science explained"
+    ],
+    "days": 60,
+    "min_ratio": 3
+  },
+  "started_on": "2026-01-01"
+}

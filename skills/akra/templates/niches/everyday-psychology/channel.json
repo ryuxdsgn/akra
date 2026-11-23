@@ -1,0 +1,40 @@
+{
+  "id": "everyday-psychology-example",
+  "name": "<Your Channel Name>",
+  "niche": "everyday psychology and habits",
+  "persona": "curious friend who reads the research so you don't have to (not a psychologist or therapist)",
+  "sensitive_topic": null,
+  "made_for_kids": false,
+  "status": "testing",
+  "language": "en",
+  "platforms": [
+    "youtube"
+  ],
+  "voice": {
+    "provider": "kokoro (local)",
+    "voice_name": "am_fenrir",
+    "model_id": "hexgrad/Kokoro-82M v1.0",
+    "settings": "speed 0.95, lang a (American English)",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/hexgrad/Kokoro-82M",
+    "license_checked": "2026-01-01"
+  },
+  "style_bible": "Code-drawn cartoon everyperson in a simple flat home, wrong-way then right-way gags, myth vs fact stamps and simple brain/process diagrams, soft lavender background with tangerine accent and teal for the evidence-based way, vertical 9:16, no real people, no diagnosis.",
+  "style_approved_on": "2026-01-01",
+  "posting_slots": [
+    "08:00",
+    "21:00"
+  ],
+  "timezone": "America/New_York",
+  "videos_per_day": 1,
+  "research": {
+    "queries": [
+      "psychology facts explained",
+      "why do we procrastinate",
+      "memory tricks that work"
+    ],
+    "days": 60,
+    "min_ratio": 3
+  },
+  "started_on": "2026-01-01"
+}

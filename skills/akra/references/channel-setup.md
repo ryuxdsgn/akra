@@ -26,7 +26,7 @@ Write a short brief:
 - 1–2 posting times (`posting_slots`, `HH:MM`) in the audience's time zone (`timezone`, an IANA name; see package-qa.md)
 
 ## 4. Create the Channel Profile
-Fill `channels/<channel-id>/channel.json` following templates/channel.example.json:
+Fill `channels/<channel-id>/channel.json` following templates/channel.example.json (or start from a niche kit in templates/niches/, which also brings a filled style bible and starter ideas):
 - `id`: lowercase letters, digits and `-` (e.g. `deep-earth`)
 - `status`: start with `testing`; change to `active` after it passes the 30-day test; `paused` if stopped for a while
 - `videos_per_day`: start with 1

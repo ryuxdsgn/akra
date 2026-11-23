@@ -1,0 +1,51 @@
+{
+  "id": "home-exercise-example",
+  "name": "<Your Channel Name>",
+  "niche": "gentle home exercise for beginners and older adults",
+  "persona": "friendly home-exercise companion who moves along with the viewer (no medical or fitness credentials)",
+  "sensitive_topic": "health",
+  "disclaimer": "This video is general information, not medical advice. Check with your doctor before starting a new exercise, and stop if you feel pain, dizziness or chest pain.",
+  "forbidden_words": [
+    "guaranteed",
+    "miracle",
+    "melts fat",
+    "burns belly fat",
+    "heals",
+    "detox",
+    "anti-aging",
+    "no pain no gain"
+  ],
+  "made_for_kids": false,
+  "status": "testing",
+  "language": "en",
+  "platforms": [
+    "youtube"
+  ],
+  "voice": {
+    "provider": "kokoro (local)",
+    "voice_name": "am_fenrir",
+    "model_id": "hexgrad/Kokoro-82M v1.0",
+    "settings": "speed 0.95, lang a (American English)",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/hexgrad/Kokoro-82M",
+    "license_checked": "2026-01-01"
+  },
+  "style_bible": "Warm flat cartoon in a bright living room, two characters (a seated coach and a doer) do one gentle move slowly with a chair or wall for support, teal motion arrows and a rep counter on top, oat background, static camera, vertical 9:16, safety line in every video, no logos, no real people.",
+  "style_approved_on": "2026-01-01",
+  "posting_slots": [
+    "08:00",
+    "16:00"
+  ],
+  "timezone": "Europe/London",
+  "videos_per_day": 1,
+  "research": {
+    "queries": [
+      "chair exercises for seniors",
+      "gentle home workout beginners",
+      "balance exercises older adults"
+    ],
+    "days": 60,
+    "min_ratio": 3
+  },
+  "started_on": "2026-01-01"
+}

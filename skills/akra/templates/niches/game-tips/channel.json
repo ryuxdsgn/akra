@@ -1,0 +1,40 @@
+{
+  "id": "game-tips-example",
+  "name": "<Your Channel Name>",
+  "niche": "tips for <Game Title>: mechanics, hidden features, beginner mistakes, efficient routes",
+  "persona": "experienced player friend who tests every tip before sharing it (not affiliated with the publisher)",
+  "sensitive_topic": null,
+  "made_for_kids": false,
+  "status": "testing",
+  "language": "en",
+  "platforms": [
+    "youtube"
+  ],
+  "voice": {
+    "provider": "kokoro (local)",
+    "voice_name": "am_fenrir",
+    "model_id": "hexgrad/Kokoro-82M v1.0",
+    "settings": "speed 0.95, lang a (American English)",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/hexgrad/Kokoro-82M",
+    "license_checked": "2026-01-01"
+  },
+  "style_bible": "Own narration with code-drawn overlays (numbered step chips, arrows, mini-maps, comparison cards) over short clips of the user's own gameplay, or fully drawn diagrams; deep navy background, electric lime accent, vertical 9:16, no publisher logos beyond what the video policy allows, no other creators' footage.",
+  "style_approved_on": "2026-01-01",
+  "posting_slots": [
+    "12:00",
+    "19:00"
+  ],
+  "timezone": "America/New_York",
+  "videos_per_day": 1,
+  "research": {
+    "queries": [
+      "<Game Title> tips",
+      "<Game Title> beginner mistakes",
+      "<Game Title> hidden mechanics"
+    ],
+    "days": 60,
+    "min_ratio": 3
+  },
+  "started_on": "2026-01-01"
+}

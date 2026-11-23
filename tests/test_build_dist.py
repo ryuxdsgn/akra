@@ -59,7 +59,7 @@ class TestBuildDist(unittest.TestCase):
         for ref in (SKILL_DIR / "references").glob("*.md"):
             routed = f"references/{ref.name}" in skill
             self.assertEqual((knowledge / ref.name).is_file(), routed, ref.name)
-        for tpl in (SKILL_DIR / "templates").iterdir():
+        for tpl in (p for p in (SKILL_DIR / "templates").iterdir() if p.is_file()):   # niches/ kits stay repo-only
             self.assertTrue((knowledge / tpl.name).is_file(), tpl.name)
         self.assertTrue((knowledge / "validate_episode.py").is_file())
 

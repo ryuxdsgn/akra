@@ -1,0 +1,40 @@
+{
+  "id": "how-it-works-example",
+  "name": "<Your Channel Name>",
+  "niche": "how everyday things work",
+  "persona": "curious engineer friend who opens things up (not a certified engineer)",
+  "sensitive_topic": null,
+  "made_for_kids": false,
+  "status": "testing",
+  "language": "en",
+  "platforms": [
+    "youtube"
+  ],
+  "voice": {
+    "provider": "kokoro (local)",
+    "voice_name": "am_fenrir",
+    "model_id": "hexgrad/Kokoro-82M v1.0",
+    "settings": "speed 0.95, lang a (American English)",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/hexgrad/Kokoro-82M",
+    "license_checked": "2026-01-01"
+  },
+  "style_bible": "Code-drawn real everyday objects in 2.5D or Three.js 3D, a see-through cutaway reveals the mechanism, cyan flow arrows and short labels on top, dark warm background, slow camera moves, vertical 9:16, no logos, no real people.",
+  "style_approved_on": "2026-01-01",
+  "posting_slots": [
+    "07:00",
+    "18:00"
+  ],
+  "timezone": "America/New_York",
+  "videos_per_day": 1,
+  "research": {
+    "queries": [
+      "how does it work explained",
+      "inside everyday objects",
+      "engineering explained shorts"
+    ],
+    "days": 60,
+    "min_ratio": 3
+  },
+  "started_on": "2026-01-01"
+}
