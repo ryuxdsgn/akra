@@ -69,6 +69,7 @@ Write `not used` if the channel has no characters. One row per fixed character; 
 - Forbidden props: real brands and logos, <others>
 
 ## 6. Motion and camera
+- Motion engine: <anime.js (`animekit.py`, default) / GSAP> · Main object: <SVG 2.5D / Three.js 3D (`three3d.py`)> (see references/build.md, "Motion engines")
 - Tempo: <e.g. change focus every 2–4 seconds / static camera for older viewers>
 - Easing and motion style: <e.g. pop-in `back.out`, small squash, shake on the twist>
 - Transitions: <cut / push-in / zoom> · Maximum still frame: <seconds>

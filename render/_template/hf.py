@@ -84,15 +84,17 @@ def arrow_down(eid, x, y0, y1, color=INK):
 
 # ---- scene wrapper -------------------------------------------------------------------
 
-def scene_file(sid, svg, js, dur):
-    """One sub-composition. Timeline times are LOCAL to the scene (0 = scene start)."""
+def scene_file(sid, svg, js, dur, extra=""):
+    """One sub-composition. Timeline times are LOCAL to the scene (0 = scene start).
+    extra: optional HTML under the SVG (a three3d canvas + its module script); "" keeps the old output."""
+    extra = f'<div id="{sid}-x" style="position:absolute;inset:0;">\n{extra}\n</div>\n' if extra else ""
     return f'''<template>
 <style>
 #root {{ position:absolute; inset:0; }}
 #root svg {{ position:absolute; inset:0; }}
 </style>
 <div id="root" data-composition-id="{sid}" data-width="{W}" data-height="{H}">
-<svg id="{sid}-svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" data-layout-allow-overlap>
+{extra}<svg id="{sid}-svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" data-layout-allow-overlap>
 {svg}
 </svg>
 </div>
@@ -269,7 +271,8 @@ window.__timelines["main"] = tl;
 
 
 def build(here, ep_path, scenes, sfx_cues, brand, xfade=0.0):
-    """scenes: list of fn(p, d, shot) -> (svg, js), one per shot in time order; None = storyboard placeholder.
+    """scenes: list of fn(p, d, shot) -> (svg, js) or (svg, js, html), one per shot in time order; None = storyboard
+    placeholder. The optional html (e.g. a three3d canvas) is drawn under the scene's SVG.
     xfade > 0: soft cut. Each scene (but the last) holds its final frame `xfade` s longer and the next one fades in on
     top of it, so a cut between two shots with the same framing does not jump. The first scene never fades in (loop)."""
     ep = json.load(open(ep_path))
@@ -288,13 +291,15 @@ def build(here, ep_path, scenes, sfx_cues, brand, xfade=0.0):
         sid = f"s{i+1:02d}"; t0 = shot["t_start"]; dur = round(shot["t_end"] - t0, 2)
         if i == len(shots) - 1:                    # last scene holds to the very end (no blank tail frame)
             dur = round(total - t0, 2)
-        svg, js = fn(sid, dur, shot) if fn else storyboard_scene(sid, shot, i + 1)
+        out = fn(sid, dur, shot) if fn else storyboard_scene(sid, shot, i + 1)
+        svg, js, extra = (tuple(out) + ("",))[:3]
         hold = dur
         if xfade > 0 and i > 0:
-            js = (f'tl.fromTo("#{sid}-svg",{{opacity:0}},{{opacity:1,duration:{xfade:.2f},ease:"none",immediateRender:true}},0);' + js)
+            tgt = f"#{sid}-svg,#{sid}-x" if extra else f"#{sid}-svg"
+            js = (f'tl.fromTo("{tgt}",{{opacity:0}},{{opacity:1,duration:{xfade:.2f},ease:"none",immediateRender:true}},0);' + js)
         if xfade > 0 and i < len(shots) - 1:
             hold = round(dur + xfade, 2)
-        open(os.path.join(comp, f"{sid}.html"), "w").write(scene_file(sid, svg, js, hold))
+        open(os.path.join(comp, f"{sid}.html"), "w").write(scene_file(sid, svg, js, hold, extra))
         dur = hold
         hosts.append(f'<div id="{sid}" data-composition-id="{sid}" data-composition-src="compositions/{sid}.html" '
                      f'data-start="{t0:.2f}" data-duration="{dur:.2f}" data-track-index="1" data-track-kind="graphics" '

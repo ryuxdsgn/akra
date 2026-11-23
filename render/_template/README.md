@@ -9,6 +9,8 @@ Extracted from a first explainer episode. Copy this folder for every new episode
 | `build.py` | Scene functions `sNN(p, d, shot)`, `SCENES`, `SFX` cues | Yes |
 | `depth.py` | Cinematic depth (style v3): 4 blurred layers, bloom, light beams, hero key/rim light, grade, vignette, grain, and `bake()` for static layers to PNG | No. Shared like `hf.py` |
 | `scenekit.py` | Shared episode boilerplate: `load`/`timer`/`abs_t` (episode + word timings), GSAP helpers (`pop`, `fade`, `shake`, `push`, `move`, `bob`, `show_now`), text (`t`, `BRAND`, `banner`, `pill`), `bake_envs` (baked backgrounds) and `finish` (top band, caption band, grade, grain) | No. Shared like `hf.py`; episode props go in `envNN.py` |
+| `three3d.py` | Three.js 3D layer for a scene (pinned three 0.184.0): `three3d.scene(p, d, body)` -> `(html, js)`, the scene returns `(svg, js, html)` | No. Shared like `hf.py` |
+| `animekit.py` | anime.js v4 animation for a scene's SVG (pinned 4.4.1): `animekit.scene(p, d, body)` -> `(html, js)` | No. Shared like `hf.py` |
 | `character.py`, `mocap.py` | Shims that put the repo `library/` (or the episode's `_lib_frozen/`) on `sys.path` and load an optional character rig from `library/rig/`. No rig ships: without one, any rig helper raises a clear error, and you draw characters in the scene functions (see `skills/akra/references/library.md`) | No |
 | `assets/sfx/` | Reusable sounds (`click`, `whoosh`) + `CREDITS.md` | Add sounds when you need them |
 | `package.json` | Pinned `hyperframes@0.9.40` scripts | No |

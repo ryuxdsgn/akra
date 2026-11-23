@@ -17,6 +17,8 @@ Add new sounds to `render/_template/assets/sfx/CREDITS.md` and here when you bun
 |---|---|---|---|
 | HyperFrames (npm `hyperframes`, pinned to 0.9.40 in `render/_template/package.json`) | HTML-to-video render, preview, check, snapshot | https://www.npmjs.com/package/hyperframes | Apache-2.0 |
 | GSAP 3.15.0 | Animation timelines, loaded from a CDN in the generated `index.html` | https://gsap.com, https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js | GSAP standard license (free to use, including commercial, with restrictions on building competing no-code animation tools). verify at https://gsap.com/standard-license/ |
+| three.js 0.184.0 | Optional 3D scenes (`render/_template/three3d.py`), loaded as an ES module from a CDN | https://threejs.org, https://cdn.jsdelivr.net/npm/three@0.184.0/+esm | MIT |
+| anime.js 4.4.1 | Optional SVG animation (`render/_template/animekit.py`), loaded as an ES module from a CDN | https://animejs.com, https://cdn.jsdelivr.net/npm/animejs@4.4.1/+esm | MIT |
 | Montserrat | Default caption and label font in the template; referenced by name, not bundled | https://fonts.google.com/specimen/Montserrat | SIL Open Font License 1.1 |
 | Node.js 22+, ffmpeg, Python 3 | Runtime and tooling | https://nodejs.org, https://ffmpeg.org, https://www.python.org | Installed by you under their own licenses (ffmpeg: LGPL or GPL depending on the build) |
 

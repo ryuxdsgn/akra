@@ -28,6 +28,9 @@ If the style bible asks for **real objects**, also add:
 - **Material:** the main object's material + 2–3 small details that make it recognizable (e.g. `brushed steel shell, perforated door mesh, rubber feet`).
 - **Overlay:** if the scene explains something invisible (heat, current, pressure), write it as a layer on top of the object (`thermal overlay on the pan`), do not replace the object with an abstract shape.
 
+If the style bible makes the **main object 3D** (Three.js), also add:
+- **3D camera:** the move in one phrase (`slow orbit left + dolly in`, `top-down push`), and which parts move, open or come apart (`lid lifts, gasket glows`). Labels and overlays stay flat on top; name the part each label points at.
+
 If the scene contains **people** (historical figures, inventors, "you" the viewer), draw them as a **cartoon character** (SVG drawn in the scene, or a library item if the channel has a rig), not a silhouette:
 - **Cast:** character name + a fixed look (hair, clothes, accessories) that stays the same in all of the episode's scenes, e.g. `Host: parted dark hair, round glasses, white lab coat, navy tie`. Children use child proportions (big head).
 - **Acting:** one pose per beat (e.g. `neutral`, `point`, `think`, `surprise`, `happy`), triggered by a **word** in the narration (`point on "first"`). Emotion comes from the approved story, not guessed from the transcript.
