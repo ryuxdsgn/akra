@@ -2,6 +2,8 @@
 
 Always for **one channel**. If the user has several channels, review them one by one, then write a short comparison summary at the end.
 
+Fill-in sheet for the whole review (numbers, how to read them, winners, patterns, 3 changes, monetization, continue/change/stop): `templates/weekly-review.md`.
+
 ## Input: pull automatically from the YouTube Analytics API
 ```
 .venv-youtube/bin/python scripts/youtube_stats.py pull channels/<id>

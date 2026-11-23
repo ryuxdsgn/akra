@@ -31,7 +31,7 @@ This is a **health** channel (`sensitive_topic: "health"`). The validator checks
 - "The easiest way to start moving after a long sit."
 
 ## Safety lines
-Say one safety line in every video, and the one that fits the move's main risk. Generic wording below; check it against the source and keep it general (no personal advice).
+Say one safety line in every video, and the one that fits the move's main risk. The longer list for all health topics (food, sleep, mood, older adults) is `templates/safety-lines.md`. Generic wording below; check it against the source and keep it general (no personal advice).
 
 | Condition or situation | Generic safety line | Source type |
 |---|---|---|
