@@ -14,7 +14,7 @@ Use the cheapest model that is still enough for each step. Most tokens go into `
 - Definition of done: `qa_render.py` PASS and validation `OK`; return the MP4 path, the QA result and the list of unresolved problems (not the full log).
 - The subagent does not upload and does not dispatch other subagents.
 
-`build` subagents stay serial: wait for one to finish before sending the next. The main session then looks at the contact sheet or snapshots before handing the video to the user.
+`build` subagents stay serial: wait for one to finish before sending the next. The main session then looks at the contact sheet or snapshots before handing the video to the user, with the checklist in `templates/visual-review.md` (frames from the final MP4: overview, 30 fps motion strips, 0.1 s face strips, every cut).
 
 **Other agents** (Codex, Antigravity): if you can pick a model per task, follow the tiers in the table; if not, run everything on one model.
 

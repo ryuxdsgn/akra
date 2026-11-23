@@ -58,6 +58,8 @@ Read the script once as a viewer and ask "why?" at every line. Fix anything a vi
 **Check before finishing:** read the script while imagining the video without sound (banners and captions must carry the story); make sure the content pays off the hook's promise; cross out sentences that do not teach, build tension, or set up the payoff.
 
 ## Output
+Fill-in sheet with every part below: `templates/script-worksheet.md`.
+
 1. **Story brief** (moment, concrete detail, emotion, meaning) in 4 lines.
 2. **Hook candidate table** with scores; show the top 3 and recommend one with a short reason.
 3. **Final script**, written as one paragraph.

@@ -2,7 +2,7 @@
 
 **Policy gate:** YT-AUTH-1, YT-AUTH-2, YT-FACT-1, YT-REUSE-1, YT-AD-2 in youtube-policy.md (keep every episode monetizable).
 
-Stored in `channels/<channel-id>/ideas.md`. One bank per channel.
+Stored in `channels/<channel-id>/ideas.md` (start from `templates/ideas.md`). One bank per channel.
 
 ## Rules
 - At least **30 ideas** per channel. Add more when the unused ideas drop below 10.
