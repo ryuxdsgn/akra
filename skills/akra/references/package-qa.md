@@ -1,5 +1,7 @@
 # Mode `package`: upload package + QA
 
+Fill-in sheet for every step below: `templates/package-checklist.md`.
+
 ## Metadata
 - **Title:** in the channel language, **≤ 60 characters** (`en`) or **≤ 70 characters** (`id`), containing the main keyword. Do not lie about or exaggerate the video's content.
 - **Description:** 1–3 sentences that add context, one source line ("Source: ..."), the credit line (`Music: ...` / `Musik: ...`, voice, footage), the disclaimer on a `sensitive_topic` channel, and hashtags at the end.

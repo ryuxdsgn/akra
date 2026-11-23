@@ -3,6 +3,8 @@
 Goal: pick **one** niche per channel based on a clear score, then test it for 30 days.
 
 ## Starting candidates
+Fill-in sheet: `templates/niche-brief.md` (candidate request with demand evidence, binge loop and topic capacity per niche, score table, decision, 30-day test).
+
 Evaluate these candidates, then add 1–2 suggestions from the user. Exclude niches already used by another channel.
 1. Science & space facts
 2. History mysteries

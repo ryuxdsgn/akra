@@ -62,4 +62,6 @@ Rules:
 YT-AUTH-2 (setting and props differ from the last 3 episodes), YT-COPY-2 and YT-SYN-1 in youtube-policy.md.
 
 ## Output
+Fill-in sheet with setup, shot table, continuity check and scene patterns: `templates/shot-plan.md`.
+
 Table `# | t_start–t_end | narration | type | scene description`. Save to `shots[]` in the Episode Package. Continue to the `build` mode.
