@@ -27,6 +27,9 @@ upload --schedule:
 --at <ISO+offset> sets a Meta-only slot (meta_scheduled_at) when it differs from the YouTube scheduled_at.
 Without --schedule both are published now. Writes facebook_* / instagram_* fields back to the episode.
 Caption = episode description + hashtags (#shorts dropped).
+Cover: the frame at episode `cover_at` (seconds), else 45% into the video, so Reels that share an opening shot
+do not look identical in the grid (Instagram thumb_offset; Facebook thumbnail upload, best effort).
+The render path must contain the episode id (guards against a copied episode JSON posting another video).
 """
 import argparse
 import datetime as dt
@@ -369,7 +372,65 @@ def video_file(ep, ep_path, override=None):
     if not os.path.isfile(f):
         alt = glob.glob(os.path.join(os.path.dirname(ep_path), f"{ep['id']}-assets", "*.mp4"))
         f = alt[0] if alt else sys.exit(f"video not found: {f}")
+    if not override and not render_matches(ep, f):
+        sys.exit(f"render {f} does not belong to {ep['id']} (episode id missing from the path); fix `render` "
+                 "in the episode JSON or pass --file")
     return f
+
+
+def render_matches(ep, f):
+    """True when the render path names this episode, so a copied episode JSON cannot post another episode's video."""
+    return bool(re.search(rf"(^|[^0-9A-Za-z]){re.escape(ep['id'])}([^0-9A-Za-z]|$)", f.replace(os.sep, "/")))
+
+
+COVER_SHARE = 0.45   # default cover: the action, not the opening shot that every episode shares
+
+
+def video_duration(f):
+    try:
+        out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f],
+                             capture_output=True, text=True, timeout=60).stdout.strip()
+        return float(out)
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return None
+
+
+def cover_seconds(ep, duration):
+    """Cover frame time: episode `cover_at` (seconds) if set, else COVER_SHARE of the video, kept inside it."""
+    at = ep.get("cover_at")
+    if at is None:
+        at = (duration or 0) * COVER_SHARE
+    at = max(0.0, float(at))
+    if duration:
+        at = min(at, max(0.0, duration - 0.5))
+    return round(at, 2)
+
+
+def cover_jpeg(f, at):
+    """Extract the cover frame to a temporary JPEG (ffmpeg); None when ffmpeg is missing or fails."""
+    out = os.path.join(os.path.dirname(os.path.abspath(f)), f".cover-{os.getpid()}.jpg")
+    try:
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(at), "-i", f, "-frames:v", "1", "-q:v", "2", out],
+                       check=True, timeout=120)
+        return out
+    except (OSError, subprocess.SubprocessError):
+        return None
+
+
+def set_facebook_cover(vid, token, f, at):
+    """Best effort: a Reel still posts with Facebook's own cover if this fails."""
+    jpg = cover_jpeg(f, at)
+    if not jpg:
+        print("facebook: cover skipped (ffmpeg could not extract a frame)")
+        return
+    try:
+        with open(jpg, "rb") as fh:
+            r = requests.post(f"{GRAPH}/{vid}/thumbnails", data={"is_preferred": "true", "access_token": token},
+                              files={"source": ("cover.jpg", fh, "image/jpeg")}, timeout=120)
+        ok = r.status_code < 400 and "error" not in (r.json() if r.content else {})
+        print(f"facebook: cover at {at}s" if ok else f"facebook: cover not set ({r.text[:200]})")
+    finally:
+        os.remove(jpg)
 
 
 def rupload(url, token, f):
@@ -403,6 +464,7 @@ def post_facebook(ep, f, tok, schedule):
     else:
         fin["video_state"] = "PUBLISHED"
     api("POST", f"{pid}/video_reels", **fin)
+    set_facebook_cover(vid, t, f, cover_seconds(ep, video_duration(f)))
     ep["facebook_video_id"] = vid
     ep["facebook_url"] = f"https://www.facebook.com/reel/{vid}"
     print(f"facebook: {ep['facebook_url']}  " + (f"scheduled {when_utc(ep).isoformat()}" if schedule else "published"))
@@ -410,7 +472,9 @@ def post_facebook(ep, f, tok, schedule):
 
 def post_instagram(ep, f, tok):
     ig, t = tok.get("ig_user_id") or sys.exit("no Instagram account linked to the Page (run auth again)"), tok["page_token"]
-    c = api("POST", f"{ig}/media", media_type="REELS", upload_type="resumable", caption=caption(ep), share_to_feed="true", access_token=t)
+    at = cover_seconds(ep, video_duration(f))
+    c = api("POST", f"{ig}/media", media_type="REELS", upload_type="resumable", caption=caption(ep), share_to_feed="true",
+            thumb_offset=str(int(at * 1000)), access_token=t)
     cid = c["id"]
     rupload(c.get("uri") or f"{RUPLOAD}/ig-api-upload/v23.0/{cid}", t, f)
     for _ in range(90):                                       # processing usually takes 30-90 s
@@ -443,7 +507,8 @@ def upload(a):
         dt.datetime.fromisoformat(a.at).utcoffset() is not None or sys.exit("--at needs a timezone offset")
         ep["meta_scheduled_at"] = a.at
     if a.dry_run:
-        print(json.dumps({"video": f, "scheduled_at": ep.get("scheduled_at"), "caption": caption(ep)}, indent=2, ensure_ascii=False))
+        print(json.dumps({"video": f, "scheduled_at": ep.get("scheduled_at"), "cover_at": cover_seconds(ep, video_duration(f)),
+                          "caption": caption(ep)}, indent=2, ensure_ascii=False))
         return
     plats = channel_platforms(ch, a.only)
     for name in ("facebook", "instagram"):

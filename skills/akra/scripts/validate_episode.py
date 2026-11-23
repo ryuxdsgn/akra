@@ -194,6 +194,16 @@ def topic_words(ep: dict) -> set:
     return words
 
 
+def check_render_owner(ep: dict) -> list:
+    """Errors when `render` points at another episode's video (a copied episode JSON would post the wrong video)."""
+    render, eid = ep.get("render"), ep.get("id")
+    if not isinstance(render, str) or not render or not isinstance(eid, str) or not eid:
+        return []
+    if re.search(rf"(^|[^0-9A-Za-z]){re.escape(eid)}([^0-9A-Za-z]|$)", render.replace("\\", "/")):
+        return []
+    return [f"render: {render} does not belong to {eid} (the episode id is missing from the path)"]
+
+
 def check_topic_repeat(ep: dict, others) -> list:
     """Errors when another episode of the same channel (any status, earlier or later) covers the same subject:
     the same `idea` id, or topic key words that overlap by TOPIC_REPEAT_MIN or more (Jaccard). Repeating a
@@ -857,6 +867,7 @@ def validate_file(path: Path, channel_path=None, previous_paths=None, for_upload
     errors = validate(ep, language, profile, previous, for_upload)
     if not is_legacy(ep):
         errors += check_topic_repeat(ep, siblings)
+    errors += check_render_owner(ep)
     errors += _channel_errors(ep, path, channel_path)
     return errors, warnings(ep, profile, previous, language), missing_policy_items(ep)
 
