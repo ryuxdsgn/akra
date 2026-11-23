@@ -116,6 +116,12 @@ Policy gate: YT-COPY-1, YT-COPY-2, YT-SYN-1, YT-SHORT-1 in youtube-policy.md.
      - Sound waves/rings may be behind a banner, but the banner does not cover the object being explained.
      Fix one, then look for the same pattern in all scenes (the same helper is used in many places).
    - **Characters:** snapshot right after each pose change and in the middle of the scene, then check: joints stay connected (shoulder, elbow, neck, hip) without gaps; the hand reaches its target (chin on `think`, object on `point`); eyelids fully close on a blink and only one mouth shows; the face is not covered by a pill/banner/caption; the pose silhouette reads at phone size; the character does not disappear mid-scene (sign of an id clash).
+   - **Visual cues on cartoon scenes (`render/_template/cues.py`).** Names to use in shot lists and reviews: **motion arrow** (curved arrow with a white halo showing which way a body part moves), **mark** (check or cross disc that judges a body part), **chip** (white pill: exercise name, sets × reps, a safety line), **meter** (rep icons that fill on the counts). Draw them through a `cues.Board` per scene, not with hand-typed coordinates:
+     - chips and the meter go in the left **info column** (`board.chip(eid, text, lane, …)`, `board.meter_box(…)`), one cue per lane, so the information always appears in the same place;
+     - motion arrows start at a rig joint (`board.arrow_at(eid, joint, toward, …)`, joints from `r34kit.joints`) and sweep over the limb that moves; the tip stays on that character's own limb, never on the other character;
+     - marks sit beside the limb they judge, with a pointer (`board.mark_at(eid, joint_a, joint_b, ok, …)`), never floating in empty space;
+     - after the build, call `board.assert_clean()`: it stops the build when a cue covers a face, leaves the safe area, touches the caption band, overlaps another cue on screen at the same time, floats more than 150 px from its limb, or is a motion arrow shorter than 120 px.
+     The check does not see props: still snapshot each cue moment and the moments when limbs sweep past props (a cat, a table). A limb may pass behind a prop that is nearer the camera, never through it.
 3. Watch it muted: can it still be understood through the diagram and captions?
 
 ## 5. Render
