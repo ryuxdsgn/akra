@@ -58,7 +58,8 @@ const update = await (async () => {
 %(body)s
 })();
 if (typeof update !== "function") throw new Error("three3d scene %(key_raw)s: the setup code must return update(t)");
-host.render = (t) => { update(t); renderer.render(scene, camera); };
+// a scene may draw itself (env3d: ink + lens passes) through scene.userData.draw(t)
+host.render = (t) => { update(t); if (scene.userData.draw) scene.userData.draw(t); else renderer.render(scene, camera); };
 await renderer.compileAsync(scene, camera);
 host.render(0);
 renderer.getContext().readPixels(0, 0, 1, 1, renderer.getContext().RGBA, renderer.getContext().UNSIGNED_BYTE, new Uint8Array(4));
