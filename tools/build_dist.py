@@ -13,7 +13,7 @@ from pathlib import Path
 
 CHATGPT_LIMIT = 8000  # max characters in a Custom GPT "Instructions" field
 GEMINI_MAX_FILES = 10  # max knowledge files per Gem (verify in Gemini)
-GEMINI_SKIP_REFS = {"library.md"}  # local-only mode (needs Python and the repo filesystem); keeps a Gem within the file limit
+GEMINI_SKIP_REFS = {"library.md", "clipper.md"}  # local-only modes (needs Python and the repo filesystem); keeps a Gem within the file limit
 GEMINI_MERGE_REFS = {"youtube-policy.md": "rules.md"}  # appended to another knowledge file to stay within the file limit
 PLATFORMS = ("claude-ai", "chatgpt", "gemini")
 SKIP = {"__pycache__", ".DS_Store"}
