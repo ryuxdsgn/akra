@@ -55,6 +55,7 @@ Before starting, **load the `hyperframes` skill** (and `hyperframes-cli`, `media
   - `scenekit.py` = shared helpers, do not copy them again per episode:
     - episode data: `load`, `timer` (`at(shot, "word")`), `abs_t` for SFX;
     - timeline: `pop`, `fade`, `shake`, `push`, `move`, `bob`, `show_now`;
+    - camera grammar: `cam`, `creep`, `punch`, `kick`, `roll`, `glide`, `lead` (see "Camera grammar" below);
     - text: `t`, `BRAND`, `banner`, `pill`;
     - background: `bake_envs` (backgrounds baked to PNG) and `finish` (top band, caption band, grade, grain).
 
@@ -102,6 +103,18 @@ Policy gate: YT-COPY-1, YT-COPY-2, YT-SYN-1, YT-SHORT-1 in youtube-policy.md.
 - 2–4 soft sound effects at key moments (optional).
 - Footer with the active channel's brand text (`brand.text`) and the brand background from the style bible.
 
+### Camera grammar (every scene)
+Measured on fast animated story shorts; viewers read a dead frame as a freeze.
+- Wrap the scene art in `sk.cam(p, art)`: the outer group creeps, the inner group takes the accents.
+- **Every hold creeps:** `sk.creep(p, d)` pushes in 0.15 % per frame for the whole scene (0.15-0.35 measured). A static stretch of 12+ frames fails QA (`frozen`).
+- **Punch words:** `sk.punch(p, t)` adds a 5 % push-in over ~9 frames on the key word.
+- **Impacts:** `sk.kick(p, t)` jumps and flips sign every frame, dying out over 7 frames. Use it for a hit, a drop or a slam, not for emphasis.
+- **Drama or falls:** `sk.roll(p, t, 4.5)` tilts 4-5 degrees; roll back with `sk.roll(p, t, 0)`.
+- **Moves between framings:** `sk.glide(p, eid, t, d, x=, y=, scale=)` uses smootherstep over 18-40 frames. Hard cuts are only for big jumps (another place or time).
+- **Timing:** a visual reaction lands 0-3 frames before its word: `sk.lead(at(shot, "word"))`.
+- Foreground props (a plant, a door frame or a shoulder in the near layer) in about 1/3 of shots add depth.
+- Three.js scenes follow the same rules inside `update(t)`: the camera creeps or orbits during a hold and never stops dead.
+
 ## 4. QA before render
 1. `npm run check` must pass without errors.
 2. `npx hyperframes snapshot` at several points (opening, each scene change, closing), then **look at the images**: text is readable and not cut off, captions do not collide with labels, the diagram is accurate.
@@ -129,6 +142,7 @@ Policy gate: YT-COPY-1, YT-COPY-2, YT-SYN-1, YT-SHORT-1 in youtube-policy.md.
 - Render MP4 **1080×1920**, 30 fps, to `render/<channel-id>/<ep-id>/renders/`.
 - QA after render, one command: `python3 skills/akra/scripts/qa_render.py render/<channel-id>/<ep-id> --strip <seconds of a moving scene>`.
   - This script checks loudness (-15.5..-12.5 LUFS, peak ≤ -0.9 dB), loop SSIM (≥ 0.95), duration against `vo_duration`, format 1080×1920 30 fps + audio, and no silence > 1.2 seconds.
+  - Add-on rows: `flicker` (a limb or prop that blinks for one frame), `black/white` (an unplanned black or white frame; planned flashes go in the episode JSON as `"flash_at": [s]`), `pop frames` (the whole frame jumps for one frame and back), `frozen` (12+ frames without any visible motion: add `sk.creep` or more motion).
   - Then it copies the MP4 to `channels/<channel-id>/episodes/<ep-id>-assets/<ep-id>.mp4`.
   - The metrics block at the top of `REVIEW.md` is written or updated; the notes below it stay safe.
   - Exit 1 on any FAIL: fix, then render again.

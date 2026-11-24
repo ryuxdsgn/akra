@@ -96,6 +96,58 @@ def push(p, eid, d, s0=1.0, s1=1.04, ox=540, oy=760, at_=0):
             f'{{scale:{s1},svgOrigin:"{ox} {oy}",duration:{d:.2f},ease:"sine.inOut"{lazy}}},{at_:.2f});')
 
 
+# ---- camera grammar (measured on fast animated story shorts; see build.md "Camera grammar") ------------
+# Wrap the scene in two groups with cam(): the outer one creeps (slow constant push-in), the inner one takes the
+# accents (punch-ins, impact kicks, dutch rolls), so the tweens never fight over one transform.
+FPS = 30
+SMOOTHERSTEP = "(t)=>t*t*t*(t*(t*6-15)+10)"      # glide ease: soft start and stop, no overshoot
+
+
+def cam(p, inner, eid="cam"):
+    """'<g id="{p}-cam"><g id="{p}-camk">inner</g></g>': outer = creep, inner = punch/kick/roll."""
+    return f'<g id="{p}-{eid}"><g id="{p}-{eid}k">{inner}</g></g>'
+
+
+def lead(t, frames=2):
+    """A visual reaction lands 0-3 frames BEFORE its word: lead(at(shot, "boom")) -> 2 frames earlier."""
+    return max(0.0, round(t - frames / FPS, 3))
+
+
+def creep(p, d, rate=0.15, ox=540, oy=760, at_=0, eid="cam"):
+    """Every hold creeps: a constant push-in of `rate` % per frame (0.15-0.35 measured; 0.6 on punch words)
+    for the whole scene, so no stretch of frames reads as a freeze (qa_addon_frames 'frozen')."""
+    s1 = round((1 + rate / 100) ** (d * FPS), 4)
+    lazy = ",immediateRender:false" if at_ else ""
+    return (f'tl.fromTo("#{p}-{eid}",{{scale:1,svgOrigin:"{ox} {oy}"}},'
+            f'{{scale:{s1},svgOrigin:"{ox} {oy}",duration:{d:.2f},ease:"none"{lazy}}},{at_:.2f});')
+
+
+def punch(p, at_, amt=0.05, d=0.3, ox=540, oy=760, eid="camk"):
+    """Punch-in on a key word: the inner group scales up by `amt` (5 %) over ~9 frames and stays there."""
+    return (f'tl.to("#{p}-{eid}",{{scale:"+={amt}",svgOrigin:"{ox} {oy}",duration:{d},ease:"power2.out"}},{at_:.2f});')
+
+
+def kick(p, at_, amp=16, frames=7, eid="camk"):
+    """Impact kick: the frame jumps and flips sign every frame, decaying to rest over `frames` frames."""
+    keys = []
+    for i in range(frames):
+        k = amp * (1 - i / frames) * (1 if i % 2 == 0 else -1)
+        keys.append(f"{{x:{k:.1f},y:{-k * 0.5:.1f},duration:{1 / FPS:.4f}}}")
+    keys.append(f"{{x:0,y:0,duration:{1 / FPS:.4f}}}")
+    return f'tl.to("#{p}-{eid}",{{keyframes:[{",".join(keys)}],ease:"none"}},{at_:.2f});'
+
+
+def roll(p, at_, deg=4.5, d=0.45, ox=540, oy=960, eid="camk"):
+    """Dutch roll for drama or a fall: rotate the inner group 4-5 degrees (back with roll(p, t, 0))."""
+    return (f'tl.to("#{p}-{eid}",{{rotation:{deg},svgOrigin:"{ox} {oy}",duration:{d},ease:{SMOOTHERSTEP}}},{at_:.2f});')
+
+
+def glide(p, eid, at_, d, x=None, y=None, scale=None):
+    """Camera glide between two framings: smootherstep, 18-40 frames (0.6-1.33 s). Hard cuts only for big jumps."""
+    kv = ",".join(f"{k}:{v}" for k, v in (("x", x), ("y", y), ("scale", scale)) if v is not None)
+    return f'tl.to("#{p}-{eid}",{{{kv},duration:{d:.2f},ease:{SMOOTHERSTEP}}},{at_:.2f});'
+
+
 def move(p, eid, at_, d, x=None, y=None, ease="sine.inOut"):
     """Tween to an absolute x/y offset. Put the transform on an inner group, never on the tweened element."""
     kv = ",".join(f"{k}:{v}" for k, v in (("x", x), ("y", y)) if v is not None)

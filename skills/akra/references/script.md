@@ -34,7 +34,7 @@ Read the script once as a viewer and ask "why?" at every line. Fix anything a vi
 ## Hook: many candidates, choose by score (adapted from social-media-skills `hook-writer`, MIT)
 1. **Mine it from the content, do not stick it on.** Find the strongest material in the script: the most surprising fact, the biggest stakes, the most specific number, the sharpest point of view, or the most relatable moment.
 2. **Study the patterns first:** if `channels/<id>/research/patterns.md` exists, read the winning hook and title formulas in this niche and this channel's own winning hooks; at least 2 candidates use that proven mechanism (with your own words and facts, not a copy).
-3. **Write 6–8 candidates with different mechanisms:** curiosity gap, contrarian, stakes/danger, specific number, scene, question, "your ..." (relevant to the viewer). Not one idea rewritten.
+3. **Write 6–8 candidates with different mechanisms:** curiosity gap, contrarian, **paradox stated as a plain fact** ("Seventy-four soldiers broke an iron bridge just by walking across it."), stakes/danger, specific number, scene, question, "your ..." (relevant to the viewer). Not one idea rewritten.
 4. **Score 0–2 per column:**
    | Column | Question |
    |---|---|
@@ -54,6 +54,22 @@ Read the script once as a viewer and ask "why?" at every line. Fix anything a vi
 4. **Turning point:** the real moment happens ("Then the toast burns."), and the mechanism works through that moment. Every 5–8 seconds something new; one sentence per picture.
 5. **Twist or added value:** pay off the open loop; the channel's own point of view. This is the part that makes the script original.
 6. **Closing:** a loop ending (the last sentence connects to the hook) **or** a light CTA ("Follow for part 2"). Not both.
+
+### Alternative structure: story short (adapted from claude-animated-shorts, MIT)
+Use it when the topic is **one true story with a visible cause and effect** (something that broke, fell, exploded, went wrong because of physics or a habit). It was measured on 20 fast animated story shorts: voice from frame 1, no intro, no outro, the video ends on the last word.
+1. **Hook = the absurd fact as a statement**, first sentence, no setup.
+2. **Setting in 1–2 lines:** year or time of day, place, a named everyday person, one number. Present tense works well.
+3. **Escalation in 3–6 beats**, each a little bigger: people doubt or laugh (short in-character lines), the stakes climb. 1–2 jokes, and every joke is a **real, sourced fact** (claim vs reality), never an invented one.
+4. **Snap:** the moment it breaks. Optional deadpan double line right after ("Luckily, … / Unluckily, …").
+5. **Mystery beat:** one "Wait, why?" question.
+6. **Pivot:** "You see," / "Ternyata," then the real mechanism through **one everyday analogy** ("Ever pushed a kid on a swing?").
+7. **Consequence:** the rule, habit or law it created.
+8. **Callback twist:** the last 1–2 short sentences turn the opening around. Stop there.
+
+Rules for this structure:
+- **Never narrate what the viewer already sees.** The picture shows the action; the voice adds why, how much, or what it means.
+- Every sentence can be drawn literally (one picture per sentence); props carry the jokes.
+- The story, characters and wording are always your own. Study the formula, never copy another channel's script or shots.
 
 **Check before finishing:** read the script while imagining the video without sound (banners and captions must carry the story); make sure the content pays off the hook's promise; cross out sentences that do not teach, build tension, or set up the payoff.
 
