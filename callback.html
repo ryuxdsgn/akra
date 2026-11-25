@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login Tipis Uploader</title></head>
+<body style="font:16px system-ui,sans-serif;max-width:600px;margin:40px auto;padding:0 16px">
+<p id="m">Meneruskan login ke aplikasi lokal...</p>
+<script>
+// Forward the OAuth result (?code=..&state=..) to the uploader running on this computer.
+var q = location.search;
+if (q) { location.replace("http://localhost:8765/" + q); }
+else { document.getElementById("m").textContent = "Tidak ada data login."; }
+</script>
+</body></html>
